@@ -8,9 +8,9 @@ Build | PivotalServices.Redis.Messaging |
 - In the `startup.cs` class, under `ConfigureServices` method add the below extension method as below.
 
 ```c#
-	using PivotalServices.Redis.Messaging;
+    using PivotalServices.Redis.Messaging;
 	
-	public virtual void ConfigureServices(IServiceCollection services)
+    public virtual void ConfigureServices(IServiceCollection services)
     {
         services.AddRedisMessagingConsumer();
     }
@@ -21,30 +21,24 @@ Build | PivotalServices.Redis.Messaging |
 - I would use the `Configure` method of `startup.cs` to demonstrate it (as below). But you can always inject `PivotalServices.Redis.Messaging.IConsumer` into any of the classes and perform the necessary operations there.
 
 ```c#
-	using PivotalServices.Redis.Messaging;
+    using PivotalServices.Redis.Messaging;
 
-	public void Configure(IApplicationBuilder app, IConsumer consumer) 
-	{
-		consumer.StartConsumption("myChannel", (message) =>
-		{
-			//Any action to be performed when a message is received
-			Console.Out.WriteLine($"Received Message, {message.Id}");
-		});
-	}
-```
-- Similarly, if to unsubscribe from a channel you can call `StopConsumption` as below, using `IApplicationLifetime`
-
-```c#
-	using PivotalServices.Redis.Messaging;
-
-	public void Configure(IApplicationBuilder app, IApplicationLifetime lifetime, IConsumer consumer)
+    public void Configure(IApplicationBuilder app, IConsumer consumer) 
     {
         consumer.StartConsumption("myChannel", (message) =>
         {
             //Any action to be performed when a message is received
-			Console.Out.WriteLine($"Received Message, {message.Id}");
+	    Console.Out.WriteLine($"Received Message, {message.Id}");
         });
+    }
+```
+- Similarly, if to unsubscribe from a channel you can call `StopConsumption` as below, using `IApplicationLifetime`
 
+```c#
+    using PivotalServices.Redis.Messaging;
+
+    public void Configure(IApplicationBuilder app, IApplicationLifetime lifetime, IConsumer consumer)
+    {
         lifetime.ApplicationStopping.Register(() => consumer.StopConsumption("myChannel"));
     }
 ```
@@ -54,9 +48,9 @@ Build | PivotalServices.Redis.Messaging |
 - In the `startup.cs` class, under `ConfigureServices` method add the below extension method as below.
 
 ```c#
-	using PivotalServices.Redis.Messaging;
+    using PivotalServices.Redis.Messaging;
 	
-	public virtual void ConfigureServices(IServiceCollection services)
+    public virtual void ConfigureServices(IServiceCollection services)
     {
         services.AddRedisMessagingProducer();
     }
@@ -67,16 +61,16 @@ Build | PivotalServices.Redis.Messaging |
 - I would use the `Configure` method of `startup.cs` to demonstrate it (as below - publish a message every 10 seconds). But you can always inject `PivotalServices.Redis.Messaging.IProducer` into any of the classes and publish messages there.
 
 ```c#
-	using PivotalServices.Redis.Messaging;
+    using PivotalServices.Redis.Messaging;
 
-	public void Configure(IApplicationBuilder app, IProducer producer)
-	{
-		while(true)
-		{
-			producer.Publish("myChannel", new Message(Guid.NewGuid().ToString(), DateTime.Now.ToString())
-			Thread.Sleep(10000);
-		}
-	}
+    public void Configure(IApplicationBuilder app, IProducer producer)
+    {
+        while(true)
+        {
+            producer.Publish("myChannel", new Message(Guid.NewGuid().ToString(), DateTime.Now.ToString())
+            Thread.Sleep(10000);
+        }
+    }
 ```
 
 
