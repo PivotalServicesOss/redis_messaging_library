@@ -67,7 +67,7 @@ Build | PivotalServices.Redis.Messaging |
     {
         while(true)
         {
-            producer.Publish("myChannel", new Message(Guid.NewGuid().ToString(), DateTime.Now.ToString())
+            producer.Publish("myChannel", new Message(Guid.NewGuid().ToString(), DateTime.Now.ToString()));
             Thread.Sleep(10000);
         }
     }
