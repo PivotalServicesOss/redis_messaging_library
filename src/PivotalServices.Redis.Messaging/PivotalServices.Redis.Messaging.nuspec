@@ -10,7 +10,7 @@
     <license type="expression">MIT</license>
     <description>A simple messaging library using Redis pub/sub</description>
     <copyright>$PivotalServicesPackageCopyright$</copyright>
-    <repository type="git" url="https://github.com/alfusinigoj/pivotal_cloudfoundry_replatform_bootstrap.git"/>
+    <repository type="git" url="https://github.com/alfusinigoj/pivotalservices_redis_messaging_library.git"/>
     <tags>Redis;Messaging;pub;sub</tags>
     <dependencies>
       <group targetFramework="$TargetFramework$">
