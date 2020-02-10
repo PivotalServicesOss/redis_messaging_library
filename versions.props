@@ -1,8 +1,8 @@
 <Project>
   <PropertyGroup>
     <PivotalServicesPackageVersion>1.0.0</PivotalServicesPackageVersion>
-    <PivotalServicesPackageVersionSuffix>-rc1</PivotalServicesPackageVersionSuffix>
-    <PivotalServicesPackageVersionRevision>1</PivotalServicesPackageVersionRevision>
+    <PivotalServicesPackageVersionSuffix></PivotalServicesPackageVersionSuffix>
+    <PivotalServicesPackageVersionRevision>2</PivotalServicesPackageVersionRevision>
     <PivotalServicesPackageBuildNumber>$([System.DateTime]::Now.ToString(yyyyMMddHHmmss))</PivotalServicesPackageBuildNumber>
     <PivotalServicesPackageCopyright>All rights reserved.</PivotalServicesPackageCopyright>
     <PivotalServicesPackagePackageVersion>$(PivotalServicesPackageVersion)$(PivotalServicesPackageVersionSuffix)</PivotalServicesPackagePackageVersion>
