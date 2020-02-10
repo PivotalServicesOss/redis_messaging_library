@@ -13,8 +13,7 @@
     <repository type="git" url="https://github.com/alfusinigoj/pivotal_cloudfoundry_replatform_bootstrap.git"/>
     <tags>Redis;Messaging;pub;sub</tags>
     <dependencies>
-      <group targetFramework="$TargetFrameworkGeneral$">
-        <dependency id="Microsoft.Extensions.Logging" version ="$MicrosoftExtensionsVersion$"/>
+      <group targetFramework="$TargetFramework$">
         <dependency id="StackExchange.Redis" version ="$StackExchangeVersion$"/>
         <dependency id="Newtonsoft.Json" version ="$NewtonsoftVersion$"/>
       </group>

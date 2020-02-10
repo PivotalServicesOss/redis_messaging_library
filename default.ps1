@@ -205,8 +205,8 @@ function global:get_vstest_executable() {
 function global:get_version(){
 	$verPropsPath = "$base_dir\versions.props"
     $verProps = [xml](Get-content $verPropsPath)
-    $versionNumber = $verProps.Project.PropertyGroup[0].PivotalServicesBootstrapVersion
-    $versionSuffix = $verProps.Project.PropertyGroup[0].PivotalServicesBootstrapVersionSuffix
+    $versionNumber = $verProps.Project.PropertyGroup[0].PivotalServicesPackageVersion
+    $versionSuffix = $verProps.Project.PropertyGroup[0].PivotalServicesPackageVersionSuffix
 
     return  $versionNumber+$versionSuffix
 }

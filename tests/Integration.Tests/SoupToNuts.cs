@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Steeltoe.CloudFoundry.Connector.Redis;
 using Xunit;
 
@@ -30,8 +29,6 @@ namespace PivotalServices.Redis.Messaging.Integ.Tests
             services.AddSingleton<MessageProcessor>();
 
             serviceProvider = services.BuildServiceProvider();
-
-            serviceProvider.GetService<ILoggerFactory>().AddConsole().AddDebug();
         }
 
 
@@ -70,7 +67,6 @@ namespace PivotalServices.Redis.Messaging.Integ.Tests
             public MessageProcessor(IConsumer consumer)
             {
                 this.consumer = consumer;
-                consumer.MessageReceived += OnMessageReceived;
             }
 
             private void OnMessageReceived(Message message)
@@ -80,7 +76,7 @@ namespace PivotalServices.Redis.Messaging.Integ.Tests
 
             public void Start()
             {
-                consumer.StartConsumption("integration");
+                consumer.StartConsumption("integration", OnMessageReceived);
             }
 
             public Action<Message> OnMessageReceivedEvent;

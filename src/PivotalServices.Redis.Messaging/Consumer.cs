@@ -5,8 +5,7 @@ using StackExchange.Redis;
 
 namespace PivotalServices.Redis.Messaging
 {
-    public delegate void OnMessageReceivedEventHandler(Message message);
-    public class Consumer : IConsumer
+    public sealed class Consumer : IConsumer
     {
         private readonly IConnectionMultiplexer connectionMultiplexer;
         private readonly ILogger<Consumer> logger;
@@ -19,22 +18,20 @@ namespace PivotalServices.Redis.Messaging
             consumer = connectionMultiplexer.GetSubscriber();
         }
 
-        public event OnMessageReceivedEventHandler MessageReceived;
-
-        public void StartConsumption(string channelNameOrPattern)
+        public void StartConsumption(string channelNameOrPattern, Action<Message> onMessageReceivedAction)
         {
             logger.LogInformation($"Started consumption from channel '{channelNameOrPattern}'");
             consumer.Subscribe(channelNameOrPattern, (channel, redisValue) =>
-             {
-                 if (redisValue.IsNullOrEmpty)
-                     logger.LogError($"Message is either null or empty, from channel '{channelNameOrPattern}'");
-                 else
-                 {
-                     var message = JsonConvert.DeserializeObject<Message>(redisValue);
-                     logger.LogDebug($"Message with Id '{message.Id}' received, channel '{channelNameOrPattern}");
-                     MessageReceived?.Invoke(message);
-                 }
-             });
+            {
+                if (redisValue.IsNullOrEmpty)
+                    logger.LogError($"Message is either null or empty, from channel '{channelNameOrPattern}'");
+                else
+                {
+                    var message = JsonConvert.DeserializeObject<Message>(redisValue);
+                    logger.LogDebug($"Message with Id '{message.Id}' received, channel '{channelNameOrPattern}");
+                    onMessageReceivedAction.Invoke(message);
+                }
+            });
         }
 
         public void StopConsumption(string channelNameOrPattern)
@@ -45,8 +42,7 @@ namespace PivotalServices.Redis.Messaging
 
     public interface IConsumer
     {
-        void StartConsumption(string channelNameOrPattern);
+        void StartConsumption(string channelNameOrPattern, Action<Message> onMessageReceivedAction);
         void StopConsumption(string channelNameOrPattern);
-        event OnMessageReceivedEventHandler MessageReceived;
     }
 }

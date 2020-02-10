@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace PivotalServices.Redis.Messaging
 {
-    public class Producer : IProducer
+    public sealed class Producer : IProducer
     {
         private readonly IConnectionMultiplexer connectionMultiplexer;
         private readonly ILogger<Producer> logger;
