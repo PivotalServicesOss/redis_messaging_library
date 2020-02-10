@@ -17,8 +17,8 @@ Build | PivotalServices.Redis.Messaging |
 ```
 
 - Next step is to subscribe to a channel to receive messages.
-- `PivotalServices.Redis.Messaging.IConsumer` implementation will be in the dependency container
-- I would use the `Configure` method of `startup.cs` to demonstrate it (as below). But you can always inject `PivotalServices.Redis.Messaging.IConsumer` into any of the classes and perform the necessary operations there.
+- `PivotalServices.Redis.Messaging.IConsumer` implementation will be in the dependency container now.
+- Here, I would use the `Configure` method of `startup.cs` to demonstrate it (as below). But you can always inject `PivotalServices.Redis.Messaging.IConsumer` into any of the classes and perform the necessary operations there.
 
 ```c#
     using PivotalServices.Redis.Messaging;
@@ -32,7 +32,7 @@ Build | PivotalServices.Redis.Messaging |
         });
     }
 ```
-- Similarly, if to unsubscribe from a channel you can call `StopConsumption` as below, using `IApplicationLifetime`
+- Similarly, to unsubscribe from a channel you can call `StopConsumption` as below, using `IApplicationLifetime`
 
 ```c#
     using PivotalServices.Redis.Messaging;
@@ -72,7 +72,7 @@ Build | PivotalServices.Redis.Messaging |
         }
     }
 ```
-
+> Note: The channel name includes pattern matching, if it contains a `*`
 
 ### Ongoing development packages in MyGet
 
