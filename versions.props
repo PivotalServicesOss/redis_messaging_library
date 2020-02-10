@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <PivotalServicesPackageVersion>1.0.0</PivotalServicesPackageVersion>
-    <PivotalServicesPackageVersionSuffix></PivotalServicesPackageVersionSuffix>
+    <PivotalServicesPackageVersionSuffix>-rc1</PivotalServicesPackageVersionSuffix>
     <PivotalServicesPackageVersionRevision>1</PivotalServicesPackageVersionRevision>
     <PivotalServicesPackageBuildNumber>$([System.DateTime]::Now.ToString(yyyyMMddHHmmss))</PivotalServicesPackageBuildNumber>
     <PivotalServicesPackageCopyright>All rights reserved.</PivotalServicesPackageCopyright>
@@ -12,7 +12,7 @@
     <PivotalServicesPackagePackageVersion>$(PivotalServicesPackagePackageVersion)</PivotalServicesPackagePackageVersion>
   </PropertyGroup>
   <PropertyGroup>
-    <MicrosoftExtensionsVersion>3.1.1</MicrosoftExtensionsVersion>
+    <MicrosoftExtensionsVersion>2.1.1</MicrosoftExtensionsVersion>
     <StackExchangeVersion>2.0.601</StackExchangeVersion>
     <NewtonsoftVersion>12.0.3</NewtonsoftVersion>
     <SteeltoeVersion>2.4.2</SteeltoeVersion>
